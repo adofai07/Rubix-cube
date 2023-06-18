@@ -23,6 +23,6 @@ A cube is stored using a 55-length list, each index indicating positions below:
 
 This program uses the **Singmaster notation**.
 
-Each clockwise turn is indicated by L, R, F, B, U, D.
-Each counterclockwise turn is indicated by L', R', F', B', U', D'.
-Each half turn is indicated by L2, R2, F2, B2, U2, D2.
+* Each clockwise turn is indicated by L, R, F, B, U, D.
+* Each counterclockwise turn is indicated by L', R', F', B', U', D'.
+* Each half turn is indicated by L2, R2, F2, B2, U2, D2.
