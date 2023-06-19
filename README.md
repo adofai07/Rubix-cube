@@ -37,3 +37,8 @@ This program uses the **Singmaster notation**.
 * Each clockwise turn is indicated by L, R, F, B, U, D.
 * Each counterclockwise turn is indicated by L', R', F', B', U', D'.
 * Each half turn is indicated by L2, R2, F2, B2, U2, D2.
+
+## Scores
+
+* The score of a cube state is a float which we have to maximize.
+* The score-calculating algorithm varies depending on the `type` argument.
