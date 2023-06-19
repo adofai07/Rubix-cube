@@ -56,3 +56,22 @@ class Cube:
         if move == "D":
             for _ in range(rep):
                 self.arr[28], self.arr[29], self.arr[30], self.arr[31], self.arr[33], self.arr[34], self.arr[35], self.arr[36], self.arr[7], self.arr[8], self.arr[9], self.arr[25], self.arr[26], self.arr[27], self.arr[52], self.arr[53], self.arr[54], self.arr[43], self.arr[44], self.arr[45] = self.arr[34], self.arr[31], self.arr[28], self.arr[35], self.arr[29], self.arr[36], self.arr[33], self.arr[30], self.arr[43], self.arr[44], self.arr[45], self.arr[7], self.arr[8], self.arr[9], self.arr[25], self.arr[26], self.arr[27], self.arr[52], self.arr[53], self.arr[54]
+
+    def __str__(self) -> str:
+        return F"   {self.arr[10]}{self.arr[11]}{self.arr[12]}\n   {self.arr[13]}{self.arr[14]}{self.arr[15]}\n   {self.arr[16]}{self.arr[17]}{self.arr[18]}\n{self.arr[37]}{self.arr[38]}{self.arr[39]}{self.arr[1]}{self.arr[2]}{self.arr[3]}{self.arr[19]}{self.arr[20]}{self.arr[21]}{self.arr[46]}{self.arr[47]}{self.arr[48]}\n{self.arr[40]}{self.arr[41]}{self.arr[42]}{self.arr[4]}{self.arr[5]}{self.arr[6]}{self.arr[22]}{self.arr[23]}{self.arr[24]}{self.arr[49]}{self.arr[50]}{self.arr[51]}\n{self.arr[43]}{self.arr[44]}{self.arr[45]}{self.arr[7]}{self.arr[8]}{self.arr[9]}{self.arr[25]}{self.arr[26]}{self.arr[27]}{self.arr[52]}{self.arr[53]}{self.arr[54]}\n   {self.arr[28]}{self.arr[29]}{self.arr[30]}\n   {self.arr[31]}{self.arr[32]}{self.arr[33]}\n   {self.arr[34]}{self.arr[35]}{self.arr[36]}"
+
+# a = Cube([
+#     "   111",
+#     "   111",
+#     "   111",
+#     "222333444555",
+#     "222333444555",
+#     "222333444555",
+#     "   666",
+#     "   666",
+#     "   666"
+# ])
+
+# a.move("D")
+
+# print(a)
