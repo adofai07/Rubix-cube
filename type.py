@@ -33,27 +33,27 @@ class Cube:
         if move[-1] == "'":
             rep = 3
 
-        if move == "L":
+        if move[0] == "L":
             for _ in range(rep):
                 self.arr[37], self.arr[38], self.arr[39], self.arr[40], self.arr[42], self.arr[43], self.arr[44], self.arr[45], self.arr[10], self.arr[13], self.arr[16], self.arr[1], self.arr[4], self.arr[7], self.arr[28], self.arr[31], self.arr[34], self.arr[54], self.arr[51], self.arr[48] = self.arr[43], self.arr[40], self.arr[37], self.arr[44], self.arr[38], self.arr[45], self.arr[42], self.arr[39], self.arr[54], self.arr[51], self.arr[48], self.arr[10], self.arr[13], self.arr[16], self.arr[1], self.arr[4], self.arr[7], self.arr[28], self.arr[31], self.arr[34]
 
-        if move == "R":
+        if move[0] == "R":
             for _ in range(rep):
                 self.arr[19], self.arr[20], self.arr[21], self.arr[22], self.arr[24], self.arr[25], self.arr[26], self.arr[27], self.arr[18], self.arr[15], self.arr[12], self.arr[46], self.arr[49], self.arr[52], self.arr[36], self.arr[33], self.arr[30], self.arr[9], self.arr[6], self.arr[3] = self.arr[25], self.arr[22], self.arr[19], self.arr[26], self.arr[20], self.arr[27], self.arr[24], self.arr[21], self.arr[9], self.arr[6], self.arr[3], self.arr[18], self.arr[15], self.arr[12], self.arr[46], self.arr[49], self.arr[52], self.arr[36], self.arr[33], self.arr[30]
 
-        if move == "F":
+        if move[0] == "F":
             for _ in range(rep):
                 self.arr[1], self.arr[2], self.arr[3], self.arr[4], self.arr[6], self.arr[7], self.arr[8], self.arr[9], self.arr[16], self.arr[17], self.arr[18], self.arr[19], self.arr[22], self.arr[25], self.arr[30], self.arr[29], self.arr[28], self.arr[45], self.arr[42], self.arr[39] = self.arr[7], self.arr[4], self.arr[1], self.arr[8], self.arr[2], self.arr[9], self.arr[6], self.arr[3], self.arr[45], self.arr[42], self.arr[39], self.arr[16], self.arr[17], self.arr[18], self.arr[19], self.arr[22], self.arr[25], self.arr[30], self.arr[29], self.arr[28]
 
-        if move == "B":
+        if move[0] == "B":
             for _ in range(rep):
                 self.arr[46], self.arr[47], self.arr[48], self.arr[49], self.arr[51], self.arr[52], self.arr[53], self.arr[54], self.arr[12], self.arr[11], self.arr[10], self.arr[37], self.arr[40], self.arr[43], self.arr[34], self.arr[35], self.arr[36], self.arr[27], self.arr[24], self.arr[21] = self.arr[52], self.arr[49], self.arr[46], self.arr[53], self.arr[47], self.arr[54], self.arr[51], self.arr[48], self.arr[27], self.arr[24], self.arr[21], self.arr[12], self.arr[11], self.arr[10], self.arr[37], self.arr[40], self.arr[43], self.arr[34], self.arr[35], self.arr[36]
 
-        if move == "U":
+        if move[0] == "U":
             for _ in range(rep):
                 self.arr[10], self.arr[11], self.arr[12], self.arr[13], self.arr[15], self.arr[16], self.arr[17], self.arr[18], self.arr[48], self.arr[47], self.arr[46], self.arr[21], self.arr[20], self.arr[19], self.arr[3], self.arr[2], self.arr[1], self.arr[39], self.arr[38], self.arr[37] = self.arr[16], self.arr[13], self.arr[10], self.arr[17], self.arr[11], self.arr[18], self.arr[15], self.arr[12], self.arr[39], self.arr[38], self.arr[37], self.arr[48], self.arr[47], self.arr[46], self.arr[21], self.arr[20], self.arr[19], self.arr[3], self.arr[2], self.arr[1]
 
-        if move == "D":
+        if move[0] == "D":
             for _ in range(rep):
                 self.arr[28], self.arr[29], self.arr[30], self.arr[31], self.arr[33], self.arr[34], self.arr[35], self.arr[36], self.arr[7], self.arr[8], self.arr[9], self.arr[25], self.arr[26], self.arr[27], self.arr[52], self.arr[53], self.arr[54], self.arr[43], self.arr[44], self.arr[45] = self.arr[34], self.arr[31], self.arr[28], self.arr[35], self.arr[29], self.arr[36], self.arr[33], self.arr[30], self.arr[43], self.arr[44], self.arr[45], self.arr[7], self.arr[8], self.arr[9], self.arr[25], self.arr[26], self.arr[27], self.arr[52], self.arr[53], self.arr[54]
 
@@ -64,4 +64,18 @@ class Cube:
         for move in moves:
             self.move(move)
 
-# Hello world
+# a = Cube([
+#     "   111",
+#     "   111",
+#     "   111",
+#     "222333444555",
+#     "222333444555",
+#     "222333444555",
+#     "   666",
+#     "   666",
+#     "   666"
+# ])
+
+# a.move_list("R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R".split())
+
+# print(a)
