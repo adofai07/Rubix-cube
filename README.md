@@ -1,5 +1,16 @@
 # Rubix-cube
 
+## About the Rubik's cube
+
+Wikipedia: <https://en.wikipedia.org/wiki/Rubik%27s_Cube>
+
+The Rubik's Cube is a 3-D combination puzzle originally invented in 1974 by Hungarian sculptor and professor of architecture Ernő Rubik.
+
+## Initial configuration
+
+* The 6 colors are standardized to white, red, blue, orange, green, and yellow.
+* Also, they should be white opposite yellow, blue opposite green, and orange opposite red, and red, white, and blue arranged clockwise in that order.
+
 ## Cube type
 
 A cube is stored using a 55-length list, each index indicating positions below:

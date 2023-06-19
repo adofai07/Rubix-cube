@@ -23,7 +23,7 @@ class Cube:
                 if self.arr[i] == self.chrset[j]:
                     self.arr[i] = j
 
-    def move(self, move: str):
+    def move(self, move: str) -> None:
         if len(move) == 1:
             rep = 1
 
