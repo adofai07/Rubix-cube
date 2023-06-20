@@ -66,7 +66,7 @@ class Cube:
         for move in moves:
             self.move(move)
 
-    def score(self, type: int, *args) -> int:
+    def score(self, type: int, *args: any) -> int:
         if type == 1:
             res = 0
 
@@ -82,10 +82,10 @@ class Cube:
             for i in range(6):
                 for j in range(9 * i + 1, 9 * i + 10):
                     if self.arr[j] == dist[i][1]:
-                        res -= 2
+                        res -= 8
                     
                     elif self.arr[j] != dist[i][0]:
-                        res -= 1
+                        res -= 5
 
             return res
 
@@ -112,4 +112,4 @@ def scrambled_cube(n: int=100) -> Cube:
 
     return a
 
-print(scrambled_cube())
+print(scrambled_cube().score(1))
