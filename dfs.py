@@ -12,14 +12,16 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
 
     if max_depth < depth: return
 
-    if AI_score(cube) > max_score:
-        max_score = AI_score(cube)
+    curr_score = AI_score(cube)
+
+    if curr_score > max_score:
+        max_score = curr_score
         max_score_state = cube
         max_score_moves = moves
 
         print(F"Best so far: {' '.join(max_score_moves) :<60} (score = {max_score :+.02f})")
 
-        if max_score == 0:
+        if max_score > 0:
             sys.exit(0)
 
     # print(F"DFS(Cube, {moves}, {depth})")
@@ -31,6 +33,7 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
 
         c = DC(cube)
         c.move(move)
+
         candidates.append((c, move))
 
     candidates.sort(key=lambda x: x[0].score(1), reverse=True)
@@ -39,17 +42,7 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
     for c in candidates:
         dfs(c[0], max_depth, moves + [c[1]], depth + 1)
 
-c = Cube([
-    "   RBO",
-    "   YBR",
-    "   OGO",
-    "BBGWYYGWBYWY",
-    "YYRGOOYWRBRO",
-    "YBRYYOBWGWOR",
-    "   GRW",
-    "   OGG",
-    "   BGR"
-])
+c = scrambled_cube()
 
 print(c)
 dfs(c, max_depth=20)

@@ -20,11 +20,11 @@ def load(thread=0):
             ...
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(1024, activation='sigmoid', input_shape=(54, )),
-    tf.keras.layers.Dense(256, activation='sigmoid'),
-    tf.keras.layers.Dense(64, activation='sigmoid'),
-    tf.keras.layers.Dense(16, activation='sigmoid'),
-    tf.keras.layers.Dense(4, activation='sigmoid'),
+    tf.keras.layers.Dense(3125, activation='sigmoid', input_shape=(54, )),
+    tf.keras.layers.Dense(625, activation='sigmoid'),
+    tf.keras.layers.Dense(125, activation='sigmoid'),
+    tf.keras.layers.Dense(25, activation='sigmoid'),
+    tf.keras.layers.Dense(5, activation='sigmoid'),
     tf.keras.layers.Dense(1, activation='linear')
 ])
 
@@ -33,14 +33,14 @@ model.compile(optimizer="Adam", loss="mse", metrics=[])
 I_O = list()
 
 for i in tqdm.trange(16, ascii=True, position=0):
-    for j in tqdm.trange(100000, ascii=True, position=1, leave=False):
-        I_O.append((scrambled_cube(i).arr[1:], -i if i != 0 else 5))
+    for j in tqdm.trange(50000, ascii=True, position=1, leave=False):
+        I_O.append((scrambled_cube(i).arr[1:], -i))
 
 random.shuffle(I_O)
 
 inputs = np.asarray([i[0] for i in I_O])
 outputs = np.asarray([i[1] for i in I_O])
 
-history = model.fit(inputs, outputs, epochs=20, batch_size=20)
+history = model.fit(inputs, outputs, epochs=50, batch_size=50)
 
 save(model, 1000)
