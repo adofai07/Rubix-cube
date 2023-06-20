@@ -4,15 +4,6 @@ MOVES = ["L", "R", "F", "B", "U", "D", "L'", "R'", "F'", "B'", "U'", "D'", "L2",
 
 class Cube:
     def __init__(self, c: list[str]):
-        self.chrset = []
-
-        for i in c:
-            for j in i:
-                if j != " " and j not in self.chrset:
-                    self.chrset.append(j)
-        
-        assert len(self.chrset) == 6
-
         self.arr = [None,
                     c[3][3], c[3][4], c[3][5], c[4][3], c[4][4], c[4][5], c[5][3], c[5][4], c[5][5],
                     c[0][3], c[0][4], c[0][5], c[1][3], c[1][4], c[1][5], c[2][3], c[2][4], c[2][5],
@@ -21,6 +12,8 @@ class Cube:
                     c[3][0], c[3][1], c[3][2], c[4][0], c[4][1], c[4][2], c[5][0], c[5][1], c[5][2],
                     c[3][9], c[3][10], c[3][11], c[4][9], c[4][10], c[4][11], c[5][9], c[5][10], c[5][11]
                     ]
+
+        self.chrset = [self.arr[14], self.arr[41], self.arr[5], self.arr[23], self.arr[50], self.arr[32]]
         
         for i in range(55):
             for j in range(6):
@@ -107,9 +100,82 @@ def initial_cube() -> Cube:
 def scrambled_cube(n: int=100) -> Cube:
     a = initial_cube()
 
-    for _ in range(n):
-        a.move(MOVES[random.randrange(18)])
+    moves = list()
+    cnt = 0
+
+    while cnt < n:
+        rmove = MOVES[random.randrange(0, 18)]
+
+        chk = cnt == 0
+
+        if rmove[0] == "L":
+            for i in range(cnt - 1, -1, -1):
+                if moves[i][0] in "LR":
+                    chk = False
+                    break
+
+                if moves[i][0] in "FBUD":
+                    chk = True
+                    break
+
+        if rmove[0] == "R":
+            for i in range(cnt - 1, -1, -1):
+                if moves[i][0] in "LR":
+                    chk = False
+                    break
+
+                if moves[i][0] in "FBUD":
+                    chk = True
+                    break
+
+        if rmove[0] == "F":
+            for i in range(cnt - 1, -1, -1):
+                if moves[i][0] in "FB":
+                    chk = False
+                    break
+                
+                if moves[i][0] in "LRUD":
+                    chk = True
+                    break
+
+        if rmove[0] == "B":
+            for i in range(cnt - 1, -1, -1):
+                if moves[i][0] in "FB":
+                    chk = False
+                    break
+                
+                if moves[i][0] in "LRUD":
+                    chk = True
+                    break
+
+        if rmove[0] == "U":
+            for i in range(cnt - 1, -1, -1):
+                if moves[i][0] in "UD":
+                    chk = False
+                    break
+                
+                if moves[i][0] in "LRFB":
+                    chk = True
+                    break
+
+        if rmove[0] == "D":
+            for i in range(cnt - 1, -1, -1):
+                if moves[i][0] in "UD":
+                    chk = False
+                    break
+                
+                if moves[i][0] in "LRFB":
+                    chk = True
+                    break
+
+        if chk:
+            cnt += 1
+            moves.append(rmove)
+
+    a.move_list(moves)
+    # print(moves)
 
     return a
 
-print(scrambled_cube().score(1))
+if __name__ == "__main__":
+    print(scrambled_cube().score(1))

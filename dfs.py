@@ -39,6 +39,7 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
     for c in candidates:
         dfs(c[0], max_depth, moves + [c[1]], depth + 1)
 
-c = scrambled_cube()
+c = scrambled_cube(3)
 
+print(c)
 dfs(c, max_depth=3)
