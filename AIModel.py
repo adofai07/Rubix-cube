@@ -20,14 +20,15 @@ def load(thread=0):
             ...
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(256, activation='sigmoid', input_shape=(54, )),
+    tf.keras.layers.Dense(1024, activation='sigmoid', input_shape=(54, )),
+    tf.keras.layers.Dense(256, activation='sigmoid'),
     tf.keras.layers.Dense(64, activation='sigmoid'),
     tf.keras.layers.Dense(16, activation='sigmoid'),
     tf.keras.layers.Dense(4, activation='sigmoid'),
     tf.keras.layers.Dense(1, activation='linear')
 ])
 
-model.compile(optimizer="Adam", loss="mse", metrics=["accuracy"])
+model.compile(optimizer="Adam", loss="mse", metrics=[])
 
 I_O = list()
 
