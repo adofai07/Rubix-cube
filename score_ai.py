@@ -3,6 +3,21 @@ from type import Cube, scrambled_cube, initial_cube
 import tqdm
 import random
 import numpy as np
+import pickle
+import os
+
+def save(data, thread=0):
+    with open(F"C:/SSHS/codes/Data/G{thread}.adofai", "wb+") as f:
+        pickle.dump(data, f)
+
+def load(thread=0):
+    while True:
+        try:
+            with open(F"C:/SSHS/codes/Data/G{thread}.adofai", "rb") as f:
+                return pickle.load(f)
+            
+        except:
+            ...
 
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(256, activation='sigmoid', input_shape=(54, )),
@@ -27,3 +42,4 @@ outputs = np.asarray([i[1] for i in I_O])
 
 history = model.fit(inputs, outputs, epochs=20, batch_size=20)
 
+save(model, 1000)
