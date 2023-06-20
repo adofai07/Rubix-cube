@@ -1,5 +1,7 @@
 import random
 
+MOVES = ["L", "R", "F", "B", "U", "D", "L'", "R'", "F'", "B'", "U'", "D'", "L2", "R2", "F2", "B2", "U2", "D2"]
+
 class Cube:
     def __init__(self, c: list[str]):
         self.chrset = []
@@ -105,10 +107,8 @@ def initial_cube() -> Cube:
 def scrambled_cube(n: int=100) -> Cube:
     a = initial_cube()
 
-    moves = ["L", "R", "F", "B", "U", "D", "L'", "R'", "F'", "B'", "U'", "D'", "L2", "R2", "F2", "B2", "U2", "D2"]
-
     for _ in range(n):
-        a.move(moves[random.randrange(18)])
+        a.move(MOVES[random.randrange(18)])
 
     return a
 
