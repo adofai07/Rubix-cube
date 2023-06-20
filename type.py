@@ -1,3 +1,5 @@
+import random
+
 class Cube:
     def __init__(self, c: list[str]):
         self.chrset = []
@@ -64,18 +66,50 @@ class Cube:
         for move in moves:
             self.move(move)
 
-# a = Cube([
-#     "   111",
-#     "   111",
-#     "   111",
-#     "222333444555",
-#     "222333444555",
-#     "222333444555",
-#     "   666",
-#     "   666",
-#     "   666"
-# ])
+    def score(self, type: int, *args) -> int:
+        if type == 1:
+            res = 0
 
-# a.move_list("R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R".split())
+            dist = [
+                (self.arr[5], self.arr[50]),
+                (self.arr[14], self.arr[32]),
+                (self.arr[23], self.arr[41]),
+                (self.arr[32], self.arr[14]),
+                (self.arr[41], self.arr[23]),
+                (self.arr[50], self.arr[5])
+            ]
 
-# print(a)
+            for i in range(6):
+                for j in range(9 * i + 1, 9 * i + 10):
+                    if self.arr[j] == dist[i][1]:
+                        res -= 2
+                    
+                    elif self.arr[j] != dist[i][0]:
+                        res -= 1
+
+            return res
+
+def initial_cube() -> Cube:
+    return Cube([
+        "   111",
+        "   111",
+        "   111",
+        "222333444555",
+        "222333444555",
+        "222333444555",
+        "   666",
+        "   666",
+        "   666"
+    ])
+
+def scrambled_cube(n: int=100) -> Cube:
+    a = initial_cube()
+
+    moves = ["L", "R", "F", "B", "U", "D", "L'", "R'", "F'", "B'", "U'", "D'", "L2", "R2", "F2", "B2", "U2", "D2"]
+
+    for _ in range(n):
+        a.move(moves[random.randrange(18)])
+
+    return a
+
+print(scrambled_cube())
