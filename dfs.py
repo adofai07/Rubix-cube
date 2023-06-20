@@ -41,4 +41,4 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
 
 c = scrambled_cube()
 
-dfs(c, max_depth=20)
+dfs(c, max_depth=3)
