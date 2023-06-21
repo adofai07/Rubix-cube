@@ -41,4 +41,15 @@ This program uses the **Singmaster notation**.
 ## Scores
 
 * The score of a cube state is a float which we have to maximize.
-* The score-calculating algorithm varies depending on the `type` argument.
+* The score of a state is computed via a DNN model.
+
+## DNN model storing
+
+* The GNN models used in this project have the `.adofai` extension.
+
+`File name`|`DNN layers`
+|:---|:---|
+|`G1000`|`256, 64, 16, 4, 1`|
+|`G1001`|`3125, 625, 125, 25, 5, 1`|
+|`G1002`|`4096, 1024, 256, 64, 16, 4, 1`|
+|`G1003 (planned)`|`256, 64, 16, 4, 1`|

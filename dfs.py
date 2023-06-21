@@ -44,5 +44,17 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
 
 c = scrambled_cube()
 
+c = Cube([
+    "   RWW",
+    "   YRY",
+    "   YGR",
+    "YOBROBWGBOGG",
+    "BGGRYRBBWBWO",
+    "OOWGWOGRRGYB",
+    "   ORY",
+    "   WOY",
+    "   YBW"
+])
+
 print(c)
 dfs(c, max_depth=20)

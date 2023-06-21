@@ -39,6 +39,7 @@ model = tf.keras.Sequential([
 # ])
 
 model.compile(optimizer="Adam", loss="mse", metrics=[])
+model.load_weights(checkpoint_path).expect_partial()
 
 I_O = list()
 
