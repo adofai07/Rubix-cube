@@ -24,7 +24,7 @@ def load(thread=0):
         except:
             ...
 
-# Error if set to True
+# Error if set to True (Bigfix planned)
 FROM_SAVE = False
 
 if FROM_SAVE:
@@ -45,7 +45,7 @@ else:
 I_O = list()
 
 for i in tqdm.trange(16, ascii=True, position=0):
-    for j in tqdm.trange(2000, ascii=True, position=1, leave=False):
+    for j in tqdm.trange(100000, ascii=True, position=1, leave=False):
         I_O.append((scrambled_cube(i).arr[1:], -i))
 
 random.shuffle(I_O)
@@ -58,8 +58,8 @@ print(F"\nData: {sys.getsizeof(inputs) :,} bytes (input), {sys.getsizeof(outputs
 history = model.fit(
     inputs,
     outputs,
-    epochs=1,
-    batch_size=20
+    epochs=1000,
+    batch_size=1000
 )
 
 if os.path.exists(save_path):
