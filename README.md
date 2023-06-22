@@ -86,3 +86,4 @@ history = model.fit(inputs,
                     )
 ```
 
+The goal is to bring the loss function down to 0.1, and the value is currently 3.13. (2023.6.22)
