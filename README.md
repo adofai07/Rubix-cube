@@ -38,6 +38,12 @@ This program uses the **Singmaster notation**.
 * Each counterclockwise turn is indicated by L', R', F', B', U', D'.
 * Each half turn is indicated by L2, R2, F2, B2, U2, D2.
 
+## Algorithms
+
+* Depth-first search
+* Depth-first search and breadth-first search
+* A* (planned)
+
 ## Scores
 
 * The score of a cube state is a float which we have to maximize.
@@ -46,7 +52,7 @@ This program uses the **Singmaster notation**.
 ## DNN model storing
 
 * The DNN models used in this project have the `.h5` extension.
-* The only model remaining has 6 dense layers of size 3125, 625, 125, 25, 5, 1.
+* The has 6 dense layers of size 3125, 625, 125, 25, 5, 1.
 
 ## More about the DNN model
 
@@ -86,4 +92,4 @@ history = model.fit(inputs,
                     )
 ```
 
-The goal is to bring the loss function down to 0.1, and the value is currently 3.13. (2023.6.22)
+The goal is to bring the loss function value down to 0.1, and the value is currently 3.13. (2023.6.22)

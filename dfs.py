@@ -24,36 +24,69 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
         if max_score > 0:
             sys.exit(0)
 
-    # print(F"DFS(Cube, {moves}, {depth})")
+    if depth == max_depth:
+        return
+
+    print(F"DFS(Cube, [{' '.join(moves)}], {depth})" + " " * 40, end="\r")
 
     candidates: list[tuple[Cube, str]] = list()
 
-    for move in MOVES:
-        if depth != 0 and move[0] == moves[-1][0]: continue
+    for move1 in MOVES:
+        if depth != 0 and move1[0] == moves[-1][0]: continue
 
         c = DC(cube)
-        c.move(move)
+        c.move(move1)
 
-        candidates.append((c, move))
+        candidates.append((c, [move1]))
 
-    candidates.sort(key=lambda x: x[0].score(1), reverse=True)
+    if depth == max_depth - 1:
+        return
+
+    for move1 in MOVES:
+        for move2 in MOVES:
+            if depth != 0 and move1[0] == moves[-1][0]: continue
+            if depth != 0 and move2[0] == moves[-1][0]: continue
+
+            if depth != 0 and move2[0] == move1[0]: continue
+
+            c = DC(cube)
+            c.move(move1)
+            c.move(move2)
+
+            candidates.append((c, [move1, move2]))
+
+    # for move1 in MOVES:
+    #     for move2 in MOVES:
+    #         for move3 in MOVES:
+    #             if depth != 0 and move1[0] == moves[-1][0]: continue
+    #             if depth != 0 and move2[0] == moves[-1][0]: continue
+    #             if depth != 0 and move3[0] == moves[-1][0]: continue
+
+    #             c = DC(cube)
+    #             c.move(move1)
+    #             c.move(move2)
+    #             c.move(move3)
+
+    #             candidates.append((c, [move1, move2, move3]))
+
+    candidates.sort(key=lambda x: AI_score(x[0]), reverse=True)
     # random.shuffle(candidates)
 
     for c in candidates:
-        dfs(c[0], max_depth, moves + [c[1]], depth + 1)
+        dfs(c[0], max_depth, moves + c[1], depth + len(c[1]))
 
 c = scrambled_cube()
 
 c = Cube([
-    "   RWW",
-    "   YRY",
-    "   YGR",
-    "YOBROBWGBOGG",
-    "BGGRYRBBWBWO",
-    "OOWGWOGRRGYB",
-    "   ORY",
-    "   WOY",
-    "   YBW"
+    "   OWB",
+    "   YOB",
+    "   RBG",
+    "YGBWROYOOWRB",
+    "GBWOYGRGYBWO",
+    "RYWRGWGWRYYY",
+    "   GWO",
+    "   RRB",
+    "   BOG"
 ])
 
 print(c)

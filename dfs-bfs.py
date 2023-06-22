@@ -16,7 +16,7 @@ bfs_max_score_moves = []
 
 global_max_score = -1.8e308
 
-def dfs(cube: Cube, max_depth: int=20, max_nodes: int=1000, moves: list[str]=[], depth: int=0) -> None:
+def dfs(cube: Cube, max_depth: int=20, max_nodes: int=1000000000000000, moves: list[str]=[], depth: int=0) -> None:
     global global_max_score, dfs_max_score_state, dfs_max_score_moves, dfs_nodes
 
     if max_depth < depth: return
@@ -75,21 +75,21 @@ def bfs(cube: Cube, max_depth: int=3):
                     bfs_max_score_state = c
                     bfs_max_score_moves = dfs_max_score_moves + left[1] + [move]
 
-                    print(F"Best so far (bfs): {' '.join(bfs_max_score_moves) :<60} (score = {global_max_score :+.02f})")
+                    print(F"Best so far (bfs): {' '.join(bfs_max_score_moves) :<66} (score = {global_max_score :+.02f})")
 
 
 c = scrambled_cube()
 
 c = Cube([
-    "   RWW",
-    "   YRY",
-    "   YGR",
-    "YOBROBWGBOGG",
-    "BGGRYRBBWBWO",
-    "OOWGWOGRRGYB",
-    "   ORY",
-    "   WOY",
-    "   YBW"
+    "   YOY",
+    "   OBO",
+    "   WRY",
+    "RWGRYOBGRGYB",
+    "GWWBRWRYBROY",
+    "OWOGYRWBGOGW",
+    "   YBB",
+    "   GGO",
+    "   BRW"
 ])
 
 dfs_max_score_state = c
@@ -98,10 +98,7 @@ global_max_score = AI_score(c)
 
 print(c)
 
-bfs(bfs_max_score_state, max_depth=3)
+bfs(bfs_max_score_state, max_depth=2)
 
-while True:
-    print("DFS ---")
-    dfs(bfs_max_score_state, max_depth=5, max_nodes=120)
-    print("BFS ---")
-    bfs(dfs_max_score_state)
+print("DFS ---")
+dfs(bfs_max_score_state, max_depth=20)

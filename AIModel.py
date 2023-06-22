@@ -34,25 +34,26 @@ model = tf.keras.models.load_model(save_path)
 
 model.compile(optimizer="Adam", loss="mse", metrics=[])
 
-while True:
-    I_O = list()
+I_O = list()
 
-    for i in tqdm.trange(16, ascii=True, position=0):
-        for j in tqdm.trange(10000, ascii=True, position=1, leave=False):
-            I_O.append((scrambled_cube(i).arr[1:], -i))
+for i in tqdm.trange(16, ascii=True, position=0):
+    for j in tqdm.trange(10000, ascii=True, position=1, leave=False):
+        I_O.append((scrambled_cube(i).arr[1:], -i))
 
-    random.shuffle(I_O)
+random.shuffle(I_O)
 
-    inputs = np.asarray([i[0] for i in I_O])
-    outputs = np.asarray([i[1] for i in I_O])
+inputs = np.asarray([i[0] for i in I_O])
+outputs = np.asarray([i[1] for i in I_O])
 
-    print(F"\nData: {sys.getsizeof(inputs) :,} bytes (input), {sys.getsizeof(outputs) :,} bytes (output)\n")
+print(F"\nData: {sys.getsizeof(inputs) :,} bytes (input), {sys.getsizeof(outputs) :,} bytes (output)\n")
 
-    history = model.fit(inputs,
-                        outputs,
-                        epochs=10,
-                        batch_size=10,
-                        # callbacks=[cp_callback]
-                        )
+history = model.fit(
+    inputs,
+    outputs,
+    epochs=100,
+    batch_size=100,
+    # callbacks=[cp_callback]
+)
 
-    model.save(save_path)
+os.remove(save_path)
+model.save(save_path)
