@@ -45,11 +45,44 @@ This program uses the **Singmaster notation**.
 
 ## DNN model storing
 
-* The GNN models used in this project have the `.adofai` extension.
+* The DNN models used in this project have the `.h5` extension.
+* The only model remaining has 6 dense layers of size 3125, 625, 125, 25, 5, 1.
 
-`File name`|`DNN layers`
-|:---|:---|
-|`G1000`|`256, 64, 16, 4, 1`|
-|`G1001`|`3125, 625, 125, 25, 5, 1`|
-|`G1002`|`4096, 1024, 256, 64, 16, 4, 1`|
-|`G1003 (planned)`|`256, 64, 16, 4, 1`|
+## More about the DNN model
+
+The DNN model is made with tensorflow 2.10.0.
+
+```py
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(3125, activation='sigmoid', input_shape=(54, )),
+    tf.keras.layers.Dense(625, activation='sigmoid'),
+    tf.keras.layers.Dense(125, activation='sigmoid'),
+    tf.keras.layers.Dense(25, activation='sigmoid'),
+    tf.keras.layers.Dense(5, activation='sigmoid'),
+    tf.keras.layers.Dense(1, activation='linear')
+])
+
+model.compile(optimizer="Adam", loss="mse", metrics=[])
+```
+
+The model is trained with epochs with 16000 datas each:
+
+```py
+I_O = list()
+
+for i in range(16, ascii=True, position=0):
+    for j in range(10000, ascii=True, position=1, leave=False):
+        I_O.append((scrambled_cube(i).arr[1:], -i))
+
+random.shuffle(I_O)
+
+inputs = np.asarray([i[0] for i in I_O])
+outputs = np.asarray([i[1] for i in I_O])
+
+history = model.fit(inputs,
+                    outputs,
+                    epochs=10,
+                    batch_size=10
+                    )
+```
+
