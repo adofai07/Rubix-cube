@@ -2,7 +2,7 @@
 
 ## Notifications
 
-***Updates to this repo is stopped for now, since there are multiple files lerger than 25MB. As soon as the issue is resolved, updates will be uploaded.***
+***Updates to this repo is stopped for now, since there are multiple files larger than 25MB. As soon as the issue is resolved, updates will be uploaded.***
 
 ## About the Rubik's cube
 
