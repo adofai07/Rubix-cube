@@ -1,5 +1,9 @@
 # Rubix-cube
 
+## Notifications
+
+***Updates to this repo is stopped for now, since there are multiple files lerger than 25MB. As soon as the issue is resolved, updates will be uploaded.
+
 ## About the Rubik's cube
 
 Wikipedia: <https://en.wikipedia.org/wiki/Rubik%27s_Cube>
