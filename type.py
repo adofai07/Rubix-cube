@@ -83,6 +83,9 @@ class Cube:
                         res -= 5
 
             return res
+        
+    def __eq__(self, other) -> bool:
+        return self.arr == other.arr
 
 def initial_cube() -> Cube:
     return Cube([

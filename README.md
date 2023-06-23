@@ -6,10 +6,18 @@ Wikipedia: <https://en.wikipedia.org/wiki/Rubik%27s_Cube>
 
 The Rubik's Cube is a 3-D combination puzzle originally invented in 1974 by Hungarian sculptor and professor of architecture Ernő Rubik.
 
-## Initial configuration
+## Initial configuration of the cube
 
 * The 6 colors are standardized to white, red, blue, orange, green, and yellow.
 * Also, they should be white opposite yellow, blue opposite green, and orange opposite red, and red, white, and blue arranged clockwise in that order.
+
+## Running on your computer
+
+Please change the `repo_path` variable in `path.py` to the absolute address of this repository, like this:
+
+```py
+repo_path = R"C:\SSHS\codes\Projects\Rubix-cube"
+```
 
 ## Cube type
 
@@ -92,4 +100,4 @@ history = model.fit(inputs,
                     )
 ```
 
-The goal is to bring the loss function value down to 0.1, and the value is currently 3.13. (2023.6.22)
+The goal is to bring the loss function value down to 0.01, and the value is currently 0.038. (2023.6.23)

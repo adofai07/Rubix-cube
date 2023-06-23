@@ -2,6 +2,10 @@ from type import Cube, scrambled_cube, MOVES
 from copy import deepcopy as DC
 import sys
 from score import AI_score
+import time
+from mate_in_n_generator import mate_in_n
+
+start_time = time.time()
 
 max_score = -1.8e308
 max_score_state = None
@@ -9,6 +13,10 @@ max_score_moves = None
 
 def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> None:
     global max_score, max_score_state, max_score_moves
+
+    if mate_in_n(cube) != -1:
+        print(F"[Mate in {mate_in_n(cube)} found]")
+        sys.exit(0)
 
     if max_depth < depth: return
 
@@ -19,7 +27,7 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
         max_score_state = cube
         max_score_moves = moves
 
-        print(F"Best so far: {' '.join(max_score_moves) :<60} (score = {max_score :+.02f})")
+        print(F"Best so far: {' '.join(max_score_moves) :<60} (score = {max_score :+.02f}) (uptime = {time.time() - start_time :.02f})")
 
         if max_score > 0:
             sys.exit(0)
@@ -55,19 +63,26 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
 
             candidates.append((c, [move1, move2]))
 
-    # for move1 in MOVES:
-    #     for move2 in MOVES:
-    #         for move3 in MOVES:
-    #             if depth != 0 and move1[0] == moves[-1][0]: continue
-    #             if depth != 0 and move2[0] == moves[-1][0]: continue
-    #             if depth != 0 and move3[0] == moves[-1][0]: continue
+    if depth == max_depth - 2:
+        return
 
-    #             c = DC(cube)
-    #             c.move(move1)
-    #             c.move(move2)
-    #             c.move(move3)
+    for move1 in MOVES:
+        for move2 in MOVES:
+            for move3 in MOVES:
+                if depth != 0 and move1[0] == moves[-1][0]: continue
+                if depth != 0 and move2[0] == moves[-1][0]: continue
+                if depth != 0 and move3[0] == moves[-1][0]: continue
 
-    #             candidates.append((c, [move1, move2, move3]))
+                if depth != 0 and move2[0] == move1[0]: continue
+                if depth != 0 and move3[0] == move1[0]: continue
+                if depth != 0 and move3[0] == move2[0]: continue
+
+                c = DC(cube)
+                c.move(move1)
+                c.move(move2)
+                c.move(move3)
+
+                candidates.append((c, [move1, move2, move3]))
 
     candidates.sort(key=lambda x: AI_score(x[0]), reverse=True)
     # random.shuffle(candidates)
@@ -78,15 +93,15 @@ def dfs(cube: Cube, max_depth: int=20, moves: list[str]=[], depth: int=0) -> Non
 c = scrambled_cube()
 
 c = Cube([
-    "   OWB",
-    "   YOB",
-    "   RBG",
-    "YGBWROYOOWRB",
-    "GBWOYGRGYBWO",
-    "RYWRGWGWRYYY",
-    "   GWO",
-    "   RRB",
-    "   BOG"
+    "   RGO",
+    "   WRW",
+    "   GWR",
+    "BOYRGBWBWBYY",
+    "OBGOWYBGGRYY",
+    "GRWGYYBROGOR",
+    "   ORO",
+    "   BOW",
+    "   WBY"
 ])
 
 print(c)
