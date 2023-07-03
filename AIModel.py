@@ -29,52 +29,32 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
                                                  verbose=1)
 
 
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(3125, activation='sigmoid', input_shape=(54, )),
-    tf.keras.layers.Dense(625, activation='sigmoid'),
-    tf.keras.layers.Dense(125, activation='sigmoid'),
-    tf.keras.layers.Dense(25, activation='sigmoid'),
-    tf.keras.layers.Dense(5, activation='sigmoid'),
-    tf.keras.layers.Dense(1, activation='linear')
-])
+act1 = "tanh"
+act2 = "relu"
+act3 = "linear"
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(4096, activation='sigmoid', input_shape=(54, )),
-    tf.keras.layers.Dense(512, activation='sigmoid'),
-    tf.keras.layers.Dense(64, activation='sigmoid'),
-    tf.keras.layers.Dense(8, activation='sigmoid'),
-    tf.keras.layers.Dense(1, activation='linear')
+    tf.keras.layers.Dense(7776, activation=act1, input_shape=(54, )),
+    tf.keras.layers.Dense(1296, activation=act2),
+    tf.keras.layers.Dense(216, activation=act1),
+    tf.keras.layers.Dense(36, activation=act2),
+    tf.keras.layers.Dense(6, activation=act1),
+    tf.keras.layers.Dense(1, activation=act3)
 ])
 
-model.compile(optimizer=tf.keras.optimizers.SGD(), loss="mse", metrics=[])
-
-I_O = list()
-
-for i in tqdm.trange(16, ascii=True, position=0):
-    for j in tqdm.trange(20000, ascii=True, position=1, leave=False):
-        I_O.append((scrambled_cube(i).arr[1:], -i))
-
-random.shuffle(I_O)
-
-inputs = np.asarray([i[0] for i in I_O])
-outputs = np.asarray([i[1] for i in I_O])
-
-print(F"\nData: {sys.getsizeof(inputs) :,} bytes (input), {sys.getsizeof(outputs) :,} bytes (output)\n")
-
-history = model.fit(
-    inputs,
-    outputs,
-    epochs=200,
-    batch_size=200,
-    callbacks=[tf.keras.callbacks.EarlyStopping(monitor="loss", min_delta=0.1, mode="min", restore_best_weights=True)]
+model.compile(
+    optimizer=tf.keras.optimizers.SGD(),
+    loss="mse",
+    metrics=[
+            tf.keras.metrics.MeanAbsoluteError(name="MAerr"),
+            tf.keras.metrics.MeanAbsolutePercentageError(name="MAPerr")
+        ]
 )
 
-model.compile(optimizer=tf.keras.optimizers.Adam(), loss="mse", metrics=[])
-
 I_O = list()
 
-for i in tqdm.trange(16, ascii=True, position=0):
-    for j in tqdm.trange(20000, ascii=True, position=1, leave=False):
+for i in tqdm.trange(8, 19, ascii=True, position=0):
+    for j in tqdm.trange(40000, ascii=True, position=1, leave=False):
         I_O.append((scrambled_cube(i).arr[1:], -i))
 
 random.shuffle(I_O)
@@ -87,8 +67,39 @@ print(F"\nData: {sys.getsizeof(inputs) :,} bytes (input), {sys.getsizeof(outputs
 history = model.fit(
     inputs,
     outputs,
-    epochs=200,
-    batch_size=200
+    epochs=5,
+    batch_size=5
+)
+
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(),
+    loss="mse",
+    metrics=[
+            tf.keras.metrics.MeanAbsoluteError(name="MAerr"),
+            tf.keras.metrics.MeanAbsolutePercentageError(name="MAPerr")
+        ]
+)
+
+print(model.optimizer)
+
+I_O = list()
+
+for i in tqdm.trange(8, 19, ascii=True, position=0):
+    for j in tqdm.trange(400000, ascii=True, position=1, leave=False):
+        I_O.append((scrambled_cube(i).arr[1:], -i))
+
+random.shuffle(I_O)
+
+inputs = np.asarray([i[0] for i in I_O])
+outputs = np.asarray([i[1] for i in I_O])
+
+print(F"\nData: {sys.getsizeof(inputs) :,} bytes (input), {sys.getsizeof(outputs) :,} bytes (output)\n")
+
+history = model.fit(
+    inputs,
+    outputs,
+    epochs=2000,
+    batch_size=2000
 )
 
 if os.path.exists(save_path):

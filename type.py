@@ -86,6 +86,9 @@ class Cube:
         
     def __eq__(self, other) -> bool:
         return self.arr == other.arr
+    
+    def __lt__(self, other) -> bool:
+        return self.arr < other.arr
 
 def initial_cube() -> Cube:
     return Cube([
@@ -100,10 +103,11 @@ def initial_cube() -> Cube:
         "   666"
     ])
 
-def scrambled_cube(n: int=100) -> Cube:
+def scrambled_cube(n: int=100, print_moves: bool=False) -> Cube:
     a = initial_cube()
 
     moves = list()
+    rev_moves = list()
     cnt = 0
 
     while cnt < n:
@@ -175,8 +179,20 @@ def scrambled_cube(n: int=100) -> Cube:
             cnt += 1
             moves.append(rmove)
 
+            if rmove[-1] == "2":
+                rev_moves.append(rmove)
+            
+            elif rmove[-1] == "'":
+                rev_moves.append(rmove[0])
+
+            else:
+                rev_moves.append(rmove + "'")
+
     a.move_list(moves)
-    # print(moves)
+    
+    if print_moves:
+        print(F"Shuffle : {' '.join(moves)}")
+        print(F"Solution: {' '.join(reversed(rev_moves))}")
 
     return a
 
