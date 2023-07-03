@@ -109,7 +109,7 @@ A cube scrambled with `N` moves will be paired with a value of `-N`, which will 
 
 The goal is to bring the loss function value down to 0.01, and the value is currently 0.038. (2023.6.23)
 
-## July 3 update
+## June 29 update
 
 The `mate_in_n_generator.py` file is capable of deciding whether a cube is solvable in `X` moves, in `Y` seconds:
 
