@@ -105,4 +105,26 @@ history = model.fit(
 )
 ```
 
+A cube scrambled with `N` moves will be paired with a value of `-N`, which will be the input and output for training.
+
 The goal is to bring the loss function value down to 0.01, and the value is currently 0.038. (2023.6.23)
+
+## July 3 update
+
+The `mate_in_n_generator.py` file is capable of deciding whether a cube is solvable in `X` moves, in `Y` seconds:
+
+|X|Y|
+|:---|:---|
+|~7|~0.01|
+|8|0.03|
+|9|0.3|
+|10|3|
+
+Note that you will have to set the `N` variable to 6 and run it, to obtain the `D6.adofai` file.
+
+Due to this ability to detect "almost solvable" cubes, the DNN model training data will change.
+It will only train with data for `N` in [8, 18], where `N` is the number of moves used to scramble the cube.
+
+Also, increasing the size of the model is considered.
+
+***This update is not yet applied, due to the lack of resources to train the model.***
