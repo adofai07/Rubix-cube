@@ -97,11 +97,12 @@ random.shuffle(I_O)
 inputs = np.asarray([i[0] for i in I_O])
 outputs = np.asarray([i[1] for i in I_O])
 
-history = model.fit(inputs,
-                    outputs,
-                    epochs=10,
-                    batch_size=10
-                    )
+history = model.fit(
+    inputs,
+    outputs,
+    epochs=10,
+    batch_size=10
+)
 ```
 
 The goal is to bring the loss function value down to 0.01, and the value is currently 0.038. (2023.6.23)
