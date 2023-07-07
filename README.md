@@ -64,7 +64,7 @@ This program uses the **Singmaster notation**.
 ## DNN model storing
 
 * The DNN models used in this project have the `.h5` extension.
-* The has 6 dense layers of size 3125, 625, 125, 25, 5, 1.
+* The model has 6 dense layers of size 3125, 625, 125, 25, 5, 1.
 
 ## More about the DNN model
 
